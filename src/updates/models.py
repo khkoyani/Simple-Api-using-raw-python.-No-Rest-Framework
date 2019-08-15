@@ -14,7 +14,7 @@ class SerializedQs(models.QuerySet):
         return serialize('json', self, fields=fields)
 
     def serialize(self):
-        values = list(self.values('id', 'content', 'image', 'user', 'timestamp'))
+        values = list(self.values('id', 'content', 'image', 'user'))
         return json.dumps(values)
 
 
@@ -43,9 +43,8 @@ class Update(models.Model):
             image = 'No Image'
         data = {
             'id': self.id,
-            'timestamp': self.timestamp,
             'content': self.content,
-            'image': self.image.url,
+            'image': image,
             'user': self.user.id,
         }
         return json.dumps(data)
